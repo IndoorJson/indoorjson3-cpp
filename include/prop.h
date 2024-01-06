@@ -1,5 +1,5 @@
 /*
- * File Name: indoorjson3.h
+ * File Name: prop.h
  *
  * Copyright (c) 2023 - 2024 IndoorJson
  *
@@ -7,12 +7,17 @@
  * Create Date: 2024/1/6
  *
  */
+
 #pragma once
 
-#include "indoor_features.h"
+#include "ptr.h"
 
 namespace indoor_json3 {
 
+struct Prop {
 
+};
+
+DEFINE_PTR(Prop)
 
 }  // namespace indoor_json3

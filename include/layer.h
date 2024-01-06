@@ -1,5 +1,5 @@
 /*
- * File Name: indoorjson3.h
+ * File Name: layer.h
  *
  * Copyright (c) 2023 - 2024 IndoorJson
  *
@@ -9,10 +9,14 @@
  */
 #pragma once
 
-#include "indoor_features.h"
+#include "cell.h"
 
 namespace indoor_json3 {
 
+struct Layer {
+  std::vector<CellWPtr> cells;
+};
 
+DEFINE_PTR(Layer)
 
 }  // namespace indoor_json3

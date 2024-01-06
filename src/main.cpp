@@ -10,6 +10,8 @@
 
 #include <glog/logging.h>
 
+#include <indoorjson3.h>
+
 int main(int argc, char* argv[]) {
   LOG(INFO) << "Hello IndoorJson3!";
 }
