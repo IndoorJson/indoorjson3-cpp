@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+
+# Cmake
+build
+
+# Vim
+*.swp
+
+# vs
+.vs
+CMakeSettings.json
+out
+
+# conan
+CMakeUserPresets.json
