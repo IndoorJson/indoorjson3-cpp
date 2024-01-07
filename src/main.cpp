@@ -11,6 +11,7 @@
 #include <glog/logging.h>
 
 #include <indoorjson3.h>
+#include <serialization.h>
 
 int main(int argc, char* argv[]) {
   LOG(INFO) << "Hello IndoorJson3!";

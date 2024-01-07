@@ -9,11 +9,12 @@
  */
 #pragma once
 
+#include "feature.h"
 #include "cell.h"
 
 namespace indoor_json3 {
 
-struct Layer {
+struct Layer : Feature {
   std::vector<CellWPtr> cells;
 };
 

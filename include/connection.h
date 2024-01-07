@@ -21,7 +21,7 @@ namespace indoor_json3 {
 struct Connection : Feature {
   CellWPtr fr;
   CellWPtr to;
-  geos::geom::Geometry::Ptr boundary;
+  geos::geom::Geometry::Ptr bound;
   geos::geom::Geometry::Ptr curve;
 };
 

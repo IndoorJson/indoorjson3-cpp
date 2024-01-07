@@ -10,6 +10,9 @@ project(indoorjson3-cpp)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+if(WIN32)
+    add_compile_definitions(NOMINMAX)
+endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall --coverage")
 
@@ -37,6 +40,7 @@ include_directories(${CMAKE_INCLUDE_PATH})
 ### source code
 set(SOURCE_CODE
   src/main.cpp
+  src/serialization.cpp
 )
 
 ### library
@@ -58,6 +62,7 @@ target_link_libraries(main PRIVATE
 enable_testing()
 
 set(TEST_CASES
+  test_create
 )
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/tests/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
