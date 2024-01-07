@@ -4,6 +4,60 @@ indoorjson3 serialization and desrialization library writen in c++14
 # Introduction
 A experimental project tring to redesign IndoorGML concept to make it easy to use. And add transport system support.
 
+# Example
+```json
+{
+  "properties": {
+    "name": "indoorjson3-cpp"
+    "labels": ["indoorgml", "GIS"],
+    "language": ["English", "中文", "한국어"],
+    "author": {
+      "name": "Kunlin Yu"
+      "email": "yukunlin@syriusrobotics.com",
+    },
+  },
+  "cells": [
+    {
+      "$id": "c1",
+      "properties": {
+        "roomNumber": "1103"
+      },
+      "space": "POLYGON ((0 0, 1 0, 1 1, 0 1, 0 0))",
+      "point": "POINT (0.5 0.5)"
+    },
+    {
+      "$id": "c2",
+      "properties": {
+        "roomNumber": "1104"
+      },
+      "space": "POLYGON ((1 0, 2 0, 2 1, 1 1, 1 0))",
+      "point": "POINT (1.5 0.5)"
+    }
+  ],
+  "connections": [
+    {
+      "$id": "conn1-2",
+      "properties": {
+        "type": "door",
+        "开放时间": "全天",
+        "오픈 시간": "하루 종일"
+      },
+      "fr": "c1",
+      "to": "c2",
+      "bound": "LINESTRING (1 0, 1 1)",
+      "curve": "LINESTRING (0.5 0.5, 1.5 0.5)"
+    }
+  ],
+  "layers": [
+    {
+      "$id": "layer",
+      "cells": ["c1", "c2"]
+    }
+  ],
+  "rlineses": []
+}
+```
+
 # Depedencies
 
 ## json-schema-validator/2.2.0
@@ -99,66 +153,3 @@ conan install . --output-folder=out/build --build=missing
 ```
 5. Finally trigger configuration and building using VS GUI.
 
-# Example
-```json
-{
-  "properties": {
-    "author": {
-      "email": "yukunlin@syriusrobotics.com",
-      "name": "Kunlin Yu"
-    },
-    "labels": [
-      "indoorgml",
-      "GIS"
-    ],
-    "language": [
-      "English",
-      "中文",
-      "한국어"
-    ],
-    "name": "indoorjson3-cpp"
-  },
-  "cells": [
-    {
-      "$id": "c1",
-      "properties": {
-        "roomNumber": "1103"
-      },
-      "space": "POLYGON ((0 0, 1 0, 1 1, 0 1, 0 0))",
-      "point": "POINT (0.5 0.5)"
-    },
-    {
-      "$id": "c2",
-      "properties": {
-        "roomNumber": "1104"
-      },
-      "space": "POLYGON ((1 0, 2 0, 2 1, 1 1, 1 0))",
-      "point": "POINT (1.5 0.5)"
-    }
-  ],
-  "connections": [
-    {
-      "$id": "conn1-2",
-      "properties": {
-        "type": "door",
-        "开放时间": "全天",
-        "오픈 시간": "하루 종일"
-      },
-      "fr": "c1",
-      "to": "c2",
-      "bound": "LINESTRING (1 0, 1 1)",
-      "curve": "LINESTRING (0.5 0.5, 1.5 0.5)"
-    }
-  ],
-  "layers": [
-    {
-      "$id": "layer",
-      "cells": [
-        "c1",
-        "c2"
-      ]
-    }
-  ],
-  "rlineses": []
-}
-```
