@@ -11,10 +11,11 @@
 
 #include <geos/geom/Envelope.h>
 #include <geos/geom/Point.h>
+#include <nlohmann/json.hpp>
 
 #include <string>
 
-#include "prop.h"
+#include "ptr.h"
 
 namespace indoor_json3 {
 
@@ -23,8 +24,8 @@ struct Feature {
   std::string name;
   std::string desc;
   std::string ext_ref;
-  Prop prop;
   geos::geom::Envelope::Ptr envelope;
+  nlohmann::json properties;
 };
 
 DEFINE_PTR(Feature)

@@ -17,17 +17,13 @@
 
 #include "indoor_features.h"
 
-using json = nlohmann::json;
+using json = nlohmann::ordered_json;
 
 namespace indoor_json3 {
 
 // feature
 void to_json(json &j, const Feature &obj);
 void from_json(const json &j, Feature &obj);
-
-// properties
-void to_json(json &j, const Prop &obj);
-void from_json(const json &j, Prop &obj);
 
 // indoor features
 void to_json(json &j, const IndoorFeatures &obj);
@@ -58,15 +54,17 @@ void from_json(const json &j, RLines &obj);
 
 NLOHMANN_JSON_NAMESPACE_BEGIN
 
+using ojson = nlohmann::ordered_json;
+
 template <>
 struct adl_serializer<geos::geom::Geometry::Ptr> {
-  static void to_json(json &j, const geos::geom::Geometry::Ptr &geom) {
+  static void to_json(ojson &j, const geos::geom::Geometry::Ptr &geom) {
     geos::io::WKTWriter writer;
     std::string wkt_str = writer.write(geom.get());
     j = wkt_str;
   }
 
-  static void from_json(const json &j, geos::geom::Geometry::Ptr &geom) {
+  static void from_json(const ojson &j, geos::geom::Geometry::Ptr &geom) {
     std::string wkt_str = j.get<std::string>();
     geos::io::WKTReader reader;
     geom = reader.read(wkt_str);
@@ -75,11 +73,11 @@ struct adl_serializer<geos::geom::Geometry::Ptr> {
 
 template <typename T>
 struct adl_serializer<std::shared_ptr<T>> {
-  static void to_json(json &j, const std::shared_ptr<T> &ptr) {
+  static void to_json(ojson &j, const std::shared_ptr<T> &ptr) {
     indoor_json3::to_json(j, *ptr.get());
   }
 
-  static void from_json(const json &j, std::shared_ptr<T> &ptr) {
+  static void from_json(const ojson &j, std::shared_ptr<T> &ptr) {
     ptr = std::make_shared<T>();
     indoor_json3::from_json(j, *ptr.get());
 
@@ -89,14 +87,14 @@ struct adl_serializer<std::shared_ptr<T>> {
 
 template <typename T>
 struct adl_serializer<std::weak_ptr<T>> {
-  static void to_json(json &j, const std::weak_ptr<T> &wptr) {
+  static void to_json(ojson &j, const std::weak_ptr<T> &wptr) {
     if (auto feature = wptr.lock())
       j = feature->id;
     else
       j = nullptr;
   }
 
-  static void from_json(const json &j, std::weak_ptr<T> &wptr) {}
+  static void from_json(const ojson &j, std::weak_ptr<T> &wptr) {}
 };
 
 NLOHMANN_JSON_NAMESPACE_END
