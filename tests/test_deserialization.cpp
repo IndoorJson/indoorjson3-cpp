@@ -48,6 +48,8 @@ TEST(INDOORJSON3, DESERIALIZATION) {
 
     json j2 = indoor_features;
     LOG(INFO) << j2.dump(2);
+    std::string json_deserialized = j2.dump(2);
+    EXPECT_EQ(content, json_deserialized);
 
   } catch (json::exception &e) {
     LOG(ERROR) << "parse error: " << e.what();

@@ -41,6 +41,7 @@ include_directories(${CMAKE_INCLUDE_PATH})
 set(SOURCE_CODE
   src/main.cpp
   src/serialization.cpp
+  src/id_lookup.cpp
 )
 
 ### library

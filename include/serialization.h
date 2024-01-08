@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "indoor_features.h"
+#include "id_lookup.h"
 
 using json = nlohmann::ordered_json;
 
@@ -81,7 +82,7 @@ struct adl_serializer<std::shared_ptr<T>> {
     ptr = std::make_shared<T>();
     indoor_json3::from_json(j, *ptr.get());
 
-    //indoor_json3::IdLookup<T>::Ins().Register(ptr->id, ptr, j);
+    indoor_json3::IdLookup<T>::Ins().Register(ptr->id, ptr, j);
   }
 };
 

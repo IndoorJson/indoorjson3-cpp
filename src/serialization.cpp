@@ -8,11 +8,11 @@
  *
  */
 
-#include <string>
+#include <serialization.h>
 
 #include <nlohmann/json.hpp>
-
-#include <serialization.h>
+#include <string>
+#include <vector>
 
 using json = nlohmann::ordered_json;
 
@@ -49,12 +49,15 @@ void to_json(json &j, const IndoorFeatures &obj) {
             {"layers", obj.layers},
             {"rlineses", obj.rlineses}});
 }
+void HandleWeakRef(IndoorFeatures &indoor_features);
 void from_json(const json &j, IndoorFeatures &obj) {
   from_json(j, static_cast<Feature &>(obj));
   j.at("cells").get_to(obj.cells);
   j.at("connections").get_to(obj.connections);
   j.at("layers").get_to(obj.layers);
   j.at("rlineses").get_to(obj.rlineses);
+
+  HandleWeakRef(obj);
 }
 
 // cell
@@ -115,6 +118,45 @@ void from_json(const json &j, RLines &obj) {
   j.at("ins").get_to(obj.ins);
   j.at("outs").get_to(obj.outs);
   j.at("closure").get_to(obj.closure);
+}
+
+template <typename T>
+std::vector<std::weak_ptr<T>> LookupVectorWeakPtr(nlohmann::json j) {
+  std::vector<std::weak_ptr<T>> results;
+  for (nlohmann::json j : j) {
+    if (j.is_null()) continue;
+    auto ptr = IdLookup<T>::Ins().Id2Ptr(j.get<std::string>());
+    results.push_back(ptr);
+  }
+  return results;
+}
+
+template <typename T>
+std::weak_ptr<T> LookupWeakPtr(nlohmann::json j) {
+  if (j.is_null()) return std::weak_ptr<T>();
+  return IdLookup<T>::Ins().Id2Ptr(j.get<std::string>());
+}
+
+void HandleWeakRef(IndoorFeatures &indoor_features) {
+  for (ConnectionPtr connection : indoor_features.connections) {
+    nlohmann::json j = IdLookup<Connection>::Ins().Feature2Json(connection);
+    connection->fr = LookupWeakPtr<Cell>(j.at("fr"));
+    connection->to = LookupWeakPtr<Cell>(j.at("to"));
+  }
+
+  for (LayerPtr layer : indoor_features.layers) {
+    nlohmann::json j = IdLookup<Layer>::Ins().Feature2Json(layer);
+    layer->cells = LookupVectorWeakPtr<Cell>(j.at("cells"));
+  }
+
+  for (RLinesPtr rlines : indoor_features.rlineses) {
+    nlohmann::json j = IdLookup<RLines>::Ins().Feature2Json(rlines);
+    rlines->cell = LookupWeakPtr<Cell>(j.at("cell"));
+    rlines->ins = LookupVectorWeakPtr<Connection>(j.at("ins"));
+    rlines->outs = LookupVectorWeakPtr<Connection>(j.at("outs"));
+  }
+
+  IdLookupClearAll();
 }
 
 }  // namespace indoor_json3
