@@ -28,8 +28,8 @@ struct RLine {
 
 struct RLines : Feature {
   CellWPtr cell;
-  std::vector<ConnectionWPtr> in;
-  std::vector<ConnectionWPtr> out;
+  std::vector<ConnectionWPtr> ins;
+  std::vector<ConnectionWPtr> outs;
   std::vector<RLine> closure;
 };
 

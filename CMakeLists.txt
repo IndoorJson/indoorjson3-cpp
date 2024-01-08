@@ -3,7 +3,7 @@
 # Author: Kunlin Yu <yukunlin@syriusrobotics.com>
 # Create Date: 2024/1/6
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.15)
 project(indoorjson3-cpp)
 
 ### C++ standard
@@ -62,7 +62,7 @@ target_link_libraries(main PRIVATE
 enable_testing()
 
 set(TEST_CASES
-  test_create
+    test_create
 )
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/tests/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

@@ -25,7 +25,7 @@ struct Feature {
   std::string desc;
   std::string ext_ref;
   geos::geom::Envelope::Ptr envelope;
-  nlohmann::json properties;
+  nlohmann::ordered_json properties;
 };
 
 DEFINE_PTR(Feature)

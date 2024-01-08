@@ -8,7 +8,10 @@
  *
  */
 
-//#include <geos/io/GeoJSONWriter.h>
+#include <string>
+
+#include <nlohmann/json.hpp>
+
 #include <serialization.h>
 
 using json = nlohmann::ordered_json;
@@ -102,15 +105,15 @@ void from_json(const json &j, RLine &obj) {
 void to_json(json &j, const RLines &obj) {
   to_json(j, static_cast<const Feature &>(obj));
   j.update({{"cell", obj.cell},
-            {"in", obj.in},
-            {"out", obj.out},
+            {"ins", obj.ins},
+            {"outs", obj.outs},
             {"closure", obj.closure}});
 }
 void from_json(const json &j, RLines &obj) {
   from_json(j, static_cast<Feature &>(obj));
   j.at("cell").get_to(obj.cell);
-  j.at("in").get_to(obj.in);
-  j.at("out").get_to(obj.out);
+  j.at("ins").get_to(obj.ins);
+  j.at("outs").get_to(obj.outs);
   j.at("closure").get_to(obj.closure);
 }
 

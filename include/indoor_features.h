@@ -22,7 +22,7 @@ struct IndoorFeatures : Feature {
   std::vector<CellPtr> cells;
   std::vector<ConnectionPtr> connections;
   std::vector<LayerPtr> layers;
-  std::vector<RLines> rlineses;
+  std::vector<RLinesPtr> rlineses;
 };
 
 DEFINE_PTR(IndoorFeatures)
