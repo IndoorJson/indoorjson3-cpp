@@ -17,6 +17,7 @@
 #include <serialization.h>
 
 #include <memory>
+#include <vector>
 
 #include "test_entry.h"
 
@@ -29,21 +30,21 @@ TEST(INDOORJSON3, CREATE) {
   CellPtr c1 = std::make_shared<Cell>();
   c1->id = "c1";
   c1->space = reader.read("POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))");
-  c1->point = reader.read("POINT(0.5 0.5)");
+  c1->node = reader.read("POINT(0.5 0.5)");
   c1->properties = json::parse(R"({"roomNumber": "1101"})");
   indoor_features.cells.emplace_back(c1);
 
   CellPtr c2 = std::make_shared<Cell>();
   c2->id = "c2";
   c2->space = reader.read("POLYGON((1 0, 2 0, 2 1, 1 1, 1 0))");
-  c2->point = reader.read("POINT(1.5 0.5)");
+  c2->node = reader.read("POINT(1.5 0.5)");
   c2->properties = json::parse(R"({"roomNumber": "1102"})");
   indoor_features.cells.emplace_back(c2);
 
   CellPtr c3 = std::make_shared<Cell>();
   c3->id = "c3";
   c3->space = reader.read("POLYGON((0 1, 1 1, 1 2, 0 2, 0 1))");
-  c3->point = reader.read("POINT(0.5 1.5)");
+  c3->node = reader.read("POINT(0.5 1.5)");
   c3->properties = json::parse(R"({"roomNumber": "1103"})");
   indoor_features.cells.emplace_back(c3);
 
@@ -52,7 +53,7 @@ TEST(INDOORJSON3, CREATE) {
   conn12->fr = c1;
   conn12->to = c2;
   conn12->bound = reader.read("LINESTRING (1 0, 1 1)");
-  conn12->curve = reader.read("LINESTRING (0.5 0.5, 1.5 0.5)");
+  conn12->edge = reader.read("LINESTRING (0.5 0.5, 1.5 0.5)");
   conn12->properties = json::parse(
       R"({"type": "door", "开放时间": "全天", "오픈 시간": "하루 종일"})");
   indoor_features.connections.emplace_back(conn12);
@@ -62,7 +63,7 @@ TEST(INDOORJSON3, CREATE) {
   conn31->fr = c3;
   conn31->to = c1;
   conn31->bound = reader.read("LINESTRING (1 0, 1 1)");
-  conn31->curve = reader.read("LINESTRING (0.5 0.5, 1.5 0.5)");
+  conn31->edge = reader.read("LINESTRING (0.5 0.5, 1.5 0.5)");
   conn31->properties = json::parse(R"({"type": "window"})");
   indoor_features.connections.emplace_back(conn31);
 

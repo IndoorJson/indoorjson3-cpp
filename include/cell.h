@@ -18,7 +18,7 @@ namespace indoor_json3 {
 
 struct Cell : Feature {
   geos::geom::Geometry::Ptr space;
-  geos::geom::Geometry::Ptr point;
+  geos::geom::Geometry::Ptr node;
 };
 
 DEFINE_PTR(Cell)

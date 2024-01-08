@@ -22,7 +22,7 @@ struct Connection : Feature {
   CellWPtr fr;
   CellWPtr to;
   geos::geom::Geometry::Ptr bound;
-  geos::geom::Geometry::Ptr curve;
+  geos::geom::Geometry::Ptr edge;
 };
 
 DEFINE_PTR(Connection)

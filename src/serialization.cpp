@@ -60,12 +60,12 @@ void from_json(const json &j, IndoorFeatures &obj) {
 // cell
 void to_json(json &j, const Cell &obj) {
   to_json(j, static_cast<const Feature &>(obj));
-  j.update({{"space", obj.space}, {"point", obj.point}});
+  j.update({{"space", obj.space}, {"node", obj.node}});
 }
 void from_json(const json &j, Cell &obj) {
   from_json(j, static_cast<Feature &>(obj));
   j.at("space").get_to(obj.space);
-  j.at("point").get_to(obj.point);
+  j.at("node").get_to(obj.node);
 }
 
 // connection
@@ -74,14 +74,14 @@ void to_json(json &j, const Connection &obj) {
   j.update({{"fr", obj.fr},
             {"to", obj.to},
             {"bound", obj.bound},
-            {"curve", obj.curve}});
+            {"edge", obj.edge}});
 }
 void from_json(const json &j, Connection &obj) {
   from_json(j, static_cast<Feature &>(obj));
   j.at("fr").get_to(obj.fr);
   j.at("to").get_to(obj.to);
   j.at("bound").get_to(obj.bound);
-  j.at("curve").get_to(obj.curve);
+  j.at("edge").get_to(obj.edge);
 }
 
 // layer
