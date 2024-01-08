@@ -63,6 +63,7 @@ enable_testing()
 
 set(TEST_CASES
     test_create
+    test_deserialization
 )
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/tests/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
