@@ -8,30 +8,32 @@ A experimental project tring to redesign IndoorGML concept to make it easy to us
 ```json
 {
   "properties": {
-    "name": "indoorjson3-cpp"
+    "name": "indoorjson3-cpp",
     "labels": ["indoorgml", "GIS"],
     "language": ["English", "中文", "한국어"],
     "author": {
-      "name": "Kunlin Yu"
-      "email": "yukunlin@syriusrobotics.com",
-    },
+      "name": "Kunlin Yu",
+      "email": "yukunlin@syriusrobotics.com"
+    }
   },
   "cells": [
     {
       "$id": "c1",
-      "properties": {
-        "roomNumber": "1103"
-      },
+      "properties": {"roomNumber": "1101"},
       "space": "POLYGON ((0 0, 1 0, 1 1, 0 1, 0 0))",
-      "point": "POINT (0.5 0.5)"
+      "node": "POINT (0.5 0.5)"
     },
     {
       "$id": "c2",
-      "properties": {
-        "roomNumber": "1104"
-      },
+      "properties": {"roomNumber": "1102"},
       "space": "POLYGON ((1 0, 2 0, 2 1, 1 1, 1 0))",
-      "point": "POINT (1.5 0.5)"
+      "node": "POINT (1.5 0.5)"
+    },
+    {
+      "$id": "c3",
+      "properties": {"roomNumber": "1103"},
+      "space": "POLYGON ((0 1, 1 1, 1 2, 0 2, 0 1))",
+      "node": "POINT (0.5 1.5)"
     }
   ],
   "connections": [
@@ -45,7 +47,15 @@ A experimental project tring to redesign IndoorGML concept to make it easy to us
       "fr": "c1",
       "to": "c2",
       "bound": "LINESTRING (1 0, 1 1)",
-      "curve": "LINESTRING (0.5 0.5, 1.5 0.5)"
+      "edge": "LINESTRING (0.5 0.5, 1.5 0.5)"
+    },
+    {
+      "$id": "conn3-1",
+      "properties": {"type": "window"},
+      "fr": "c3",
+      "to": "c1",
+      "bound": "LINESTRING (1 0, 1 1)",
+      "edge": "LINESTRING (0.5 0.5, 1.5 0.5)"
     }
   ],
   "layers": [
@@ -54,7 +64,15 @@ A experimental project tring to redesign IndoorGML concept to make it easy to us
       "cells": ["c1", "c2"]
     }
   ],
-  "rlineses": []
+  "rlineses": [
+    {
+      "$id": "rlines1",
+      "cell": "c1",
+      "ins": ["conn3-1"],
+      "outs": ["conn1-2"],
+      "closure": []
+    }
+  ]
 }
 ```
 
