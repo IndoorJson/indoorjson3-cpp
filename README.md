@@ -166,8 +166,9 @@ conan install . --output-folder=out/build --build=missing
 
 4. Set CMakeSettings.json
 ```json
+  "buildRoot": "${projectDir}\\out\\build\\${name}",
   "installRoot": "${projectDir}\\out\\install\\${name}",
-  "cmakeCommandArgs": "-DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release",
+  "cmakeToolchain": "${projectDir}\\out\\build\\conan_toolchain.cmake",
 ```
 5. Finally trigger configuration and building using VS GUI.
 
