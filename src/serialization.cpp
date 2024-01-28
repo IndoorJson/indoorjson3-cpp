@@ -55,7 +55,8 @@ void from_json(const json &j, IndoorFeatures &obj) {
   j.at("cells").get_to(obj.cells);
   j.at("connections").get_to(obj.connections);
   j.at("layers").get_to(obj.layers);
-  j.at("rlineses").get_to(obj.rlineses);
+
+  if (j.contains("rlineses")) j.at("rlineses").get_to(obj.rlineses);
 
   HandleWeakRef(obj);
 }
@@ -68,7 +69,7 @@ void to_json(json &j, const Cell &obj) {
 void from_json(const json &j, Cell &obj) {
   from_json(j, static_cast<Feature &>(obj));
   j.at("space").get_to(obj.space);
-  j.at("node").get_to(obj.node);
+  if (j.contains("node")) j.at("node").get_to(obj.node);
 }
 
 // connection
@@ -83,8 +84,8 @@ void from_json(const json &j, Connection &obj) {
   from_json(j, static_cast<Feature &>(obj));
   j.at("fr").get_to(obj.fr);
   j.at("to").get_to(obj.to);
-  j.at("bound").get_to(obj.bound);
   j.at("edge").get_to(obj.edge);
+  if (j.contains("bound")) j.at("bound").get_to(obj.bound);
 }
 
 // layer
