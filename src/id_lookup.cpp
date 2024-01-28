@@ -16,7 +16,7 @@
 #include <layer.h>
 #include <rlines.h>
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 template <>
 IdLookup<Cell>* IdLookup<Cell>::instance_ = nullptr;
@@ -34,4 +34,4 @@ void IdLookupClearAll() {
   IdLookup<RLines>::Ins().Clear();
 }
 
-}  // namespace indoor_json
+}  // namespace indoorjson3

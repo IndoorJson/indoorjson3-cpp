@@ -17,7 +17,7 @@
 
 #include "ptr.h"
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 struct Feature {
   std::string id;
@@ -30,4 +30,4 @@ struct Feature {
 
 DEFINE_PTR(Feature)
 
-}  // namespace indoor_json3
+}  // namespace indoorjson3

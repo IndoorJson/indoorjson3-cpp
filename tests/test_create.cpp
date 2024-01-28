@@ -21,10 +21,10 @@
 
 #include "test_entry.h"
 
-using namespace indoor_json3;
+using namespace indoorjson3;
 
 TEST(INDOORJSON3, CREATE) {
-  indoor_json3::IndoorFeatures indoor_features;
+  IndoorFeatures indoor_features;
   geos::io::WKTReader reader;
 
   CellPtr c1 = std::make_shared<Cell>();

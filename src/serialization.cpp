@@ -16,7 +16,7 @@
 
 using json = nlohmann::ordered_json;
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 // feature
 void to_json(json &j, const Feature &obj) {
@@ -159,4 +159,4 @@ void HandleWeakRef(IndoorFeatures &indoor_features) {
   IdLookupClearAll();
 }
 
-}  // namespace indoor_json3
+}  // namespace indoorjson3

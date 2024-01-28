@@ -21,7 +21,7 @@
 
 #include "test_entry.h"
 
-using namespace indoor_json3;
+using namespace indoorjson3;
 
 TEST(INDOORJSON3, DESERIALIZATION) {
   std::string file_path = TEST_RESOURCES "/sample.json";

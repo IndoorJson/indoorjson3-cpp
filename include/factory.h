@@ -15,7 +15,7 @@
 
 #include "indoor_features.h"
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 class Factory {
  private:
@@ -38,4 +38,4 @@ class Factory {
   RLinesPtr createRLines();
 };
 
-}  // namespace indoor_json3
+}  // namespace indoorjson3

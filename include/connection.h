@@ -16,7 +16,7 @@
 #include "feature.h"
 #include "cell.h"
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 struct Connection : Feature {
   CellWPtr fr;
@@ -27,4 +27,4 @@ struct Connection : Feature {
 
 DEFINE_PTR(Connection)
 
-}  // namespace indoor_json3
+}  // namespace indoorjson3

@@ -20,7 +20,7 @@
 
 using ojson = nlohmann::ordered_json;
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 void IdLookupClearAll();
 
@@ -59,4 +59,4 @@ class IdLookup {
   }
 };
 
-}  // namespace indoor_json
+}  // namespace indoorjson3

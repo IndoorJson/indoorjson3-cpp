@@ -20,7 +20,7 @@
 
 using json = nlohmann::ordered_json;
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 // feature
 void to_json(json &j, const Feature &obj);
@@ -48,7 +48,7 @@ void from_json(const json &j, RLine &obj);
 void to_json(json &j, const RLines &obj);
 void from_json(const json &j, RLines &obj);
 
-}  // namespace indoor_json3
+}  // namespace indoorjson3
 
 #include <geos/io/WKTReader.h>
 #include <geos/io/WKTWriter.h>
@@ -74,15 +74,15 @@ struct adl_serializer<geos::geom::Geometry::Ptr> {
 
 template <typename T>
 struct adl_serializer<std::shared_ptr<T>> {
-  static void to_json(ojson &j, const std::shared_ptr<T> &ptr) {
-    indoor_json3::to_json(j, *ptr.get());
+  static void to_json(json &j, const std::shared_ptr<T> &ptr) {
+    indoorjson3::to_json(j, *ptr.get());
   }
 
   static void from_json(const ojson &j, std::shared_ptr<T> &ptr) {
     ptr = std::make_shared<T>();
-    indoor_json3::from_json(j, *ptr.get());
+    indoorjson3::from_json(j, *ptr.get());
 
-    indoor_json3::IdLookup<T>::Ins().Register(ptr->id, ptr, j);
+    indoorjson3::IdLookup<T>::Ins().Register(ptr->id, ptr, j);
   }
 };
 

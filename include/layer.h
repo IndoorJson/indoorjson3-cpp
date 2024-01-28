@@ -12,7 +12,15 @@
 #include "feature.h"
 #include "cell.h"
 
-namespace indoor_json3 {
+namespace indoorjson3 {
+
+/*
+ * If you need to create a thematic layer, then do this:
+ *
+ * indoorjson3::Layer thematic_layer;
+ * thematic_layer.properties["theme"] = "Topographic";
+ *
+ */
 
 struct Layer : Feature {
   std::vector<CellWPtr> cells;
@@ -20,4 +28,4 @@ struct Layer : Feature {
 
 DEFINE_PTR(Layer)
 
-}  // namespace indoor_json3
+}  // namespace indoorjson3

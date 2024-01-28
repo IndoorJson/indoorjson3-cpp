@@ -16,7 +16,7 @@
 #include "layer.h"
 #include "rlines.h"
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 struct IndoorFeatures : Feature {
   std::vector<CellPtr> cells;
@@ -27,4 +27,4 @@ struct IndoorFeatures : Feature {
 
 DEFINE_PTR(IndoorFeatures)
 
-}  // namespace indoor_json3
+}  // namespace indoorjson3

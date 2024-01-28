@@ -14,7 +14,7 @@
 
 #include "feature.h"
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 struct Cell : Feature {
   geos::geom::Geometry::Ptr space;
@@ -23,4 +23,4 @@ struct Cell : Feature {
 
 DEFINE_PTR(Cell)
 
-}  // namespace indoor_json3
+}  // namespace indoorjson3

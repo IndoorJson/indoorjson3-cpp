@@ -19,7 +19,7 @@
 #include "connection.h"
 #include "feature.h"
 
-namespace indoor_json3 {
+namespace indoorjson3 {
 
 struct RLine {
   ConnectionWPtr fr;
@@ -35,4 +35,4 @@ struct RLines : Feature {
 
 DEFINE_PTR(RLines)
 
-}  // namespace indoor_json3
+}  // namespace indoorjson3
