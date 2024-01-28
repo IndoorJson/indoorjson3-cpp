@@ -9,8 +9,10 @@
  */
 #pragma once
 
+#include <vector>
 #include "feature.h"
 #include "cell.h"
+#include "ptr.h"
 
 namespace indoorjson3 {
 

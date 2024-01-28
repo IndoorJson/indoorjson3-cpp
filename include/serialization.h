@@ -15,10 +15,10 @@
 #include <nlohmann/json.hpp>
 #include <vector>
 
-#include "indoor_features.h"
 #include "id_lookup.h"
+#include "indoor_features.h"
 
-using json = nlohmann::ordered_json;
+using json = nlohmann::json;
 
 namespace indoorjson3 {
 
@@ -53,22 +53,31 @@ void from_json(const json &j, RLines &obj);
 #include <geos/io/WKTReader.h>
 #include <geos/io/WKTWriter.h>
 
-NLOHMANN_JSON_NAMESPACE_BEGIN
+#include <memory>
+#include <string>
 
-using ojson = nlohmann::ordered_json;
+NLOHMANN_JSON_NAMESPACE_BEGIN
 
 template <>
 struct adl_serializer<geos::geom::Geometry::Ptr> {
-  static void to_json(ojson &j, const geos::geom::Geometry::Ptr &geom) {
-    geos::io::WKTWriter writer;
-    std::string wkt_str = writer.write(geom.get());
-    j = wkt_str;
+  static void to_json(json &j, const geos::geom::Geometry::Ptr &geom) {
+    if (geom == nullptr) {
+      j = nullptr;
+    } else {
+      geos::io::WKTWriter writer;
+      std::string wkt_str = writer.write(geom.get());
+      j = wkt_str;
+    }
   }
 
-  static void from_json(const ojson &j, geos::geom::Geometry::Ptr &geom) {
-    std::string wkt_str = j.get<std::string>();
-    geos::io::WKTReader reader;
-    geom = reader.read(wkt_str);
+  static void from_json(const json &j, geos::geom::Geometry::Ptr &geom) {
+    if (j.is_null()) {
+      geom = nullptr;
+    } else {
+      std::string wkt_str = j.get<std::string>();
+      geos::io::WKTReader reader;
+      geom = reader.read(wkt_str);
+    }
   }
 };
 
@@ -78,7 +87,7 @@ struct adl_serializer<std::shared_ptr<T>> {
     indoorjson3::to_json(j, *ptr.get());
   }
 
-  static void from_json(const ojson &j, std::shared_ptr<T> &ptr) {
+  static void from_json(const json &j, std::shared_ptr<T> &ptr) {
     ptr = std::make_shared<T>();
     indoorjson3::from_json(j, *ptr.get());
 
@@ -88,14 +97,15 @@ struct adl_serializer<std::shared_ptr<T>> {
 
 template <typename T>
 struct adl_serializer<std::weak_ptr<T>> {
-  static void to_json(ojson &j, const std::weak_ptr<T> &wptr) {
+  static void to_json(json &j, const std::weak_ptr<T> &wptr) {
     if (auto feature = wptr.lock())
-      j = feature->id;
+      j = {{"$ref", feature->id}};
     else
       j = nullptr;
   }
 
-  static void from_json(const ojson &j, std::weak_ptr<T> &wptr) {}
+  static void from_json(const json &j, std::weak_ptr<T> &wptr) {}
 };
 
 NLOHMANN_JSON_NAMESPACE_END
+
