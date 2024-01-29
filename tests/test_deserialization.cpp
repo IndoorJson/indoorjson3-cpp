@@ -9,7 +9,6 @@
  */
 #include <glog/logging.h>
 #include <indoor_features.h>
-#include <indoorjson3.h>
 #include <serialization.h>
 
 #include <fstream>

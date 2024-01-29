@@ -22,6 +22,7 @@ find_package(nlohmann_json_schema_validator REQUIRED)
 # libgeos
 find_package(GEOS REQUIRED)
 add_compile_definitions(USE_UNSTABLE_GEOS_CPP_API)
+#add_compile_definitions(USE_NLOHMANN_FROM_GEOS)
 
 # gtest
 find_package(GTest REQUIRED)
@@ -39,7 +40,6 @@ include_directories(${CMAKE_INCLUDE_PATH})
 
 ### source code
 set(SOURCE_CODE
-  src/main.cpp
   src/serialization.cpp
   src/id_lookup.cpp
 )
@@ -47,17 +47,6 @@ set(SOURCE_CODE
 ### library
 
 add_library(${PROJECT_NAME} ${SOURCE_CODE})
-
-### executable
-
-add_executable(main src/main.cpp)
-target_link_libraries(main PRIVATE
-  ${PROJECT_NAME}
-  GEOS::geos
-  nlohmann_json::nlohmann_json
-  nlohmann_json_schema_validator
-  glog::glog
-  )
 
 ### tests
 enable_testing()

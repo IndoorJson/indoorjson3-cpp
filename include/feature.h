@@ -11,11 +11,11 @@
 
 #include <geos/geom/Envelope.h>
 #include <geos/geom/Point.h>
-#include <nlohmann/json.hpp>
 
 #include <string>
 
 #include "ptr.h"
+#include "json.h"
 
 namespace indoorjson3 {
 

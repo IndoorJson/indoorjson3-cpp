@@ -10,9 +10,10 @@
 
 #include <serialization.h>
 
-#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
+
+#include <json.h>
 
 using json = nlohmann::json;
 

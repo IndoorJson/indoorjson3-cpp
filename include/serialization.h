@@ -12,11 +12,11 @@
 
 #include <geos/geom/Geometry.h>
 
-#include <nlohmann/json.hpp>
 #include <vector>
 
 #include "id_lookup.h"
 #include "indoor_features.h"
+#include "json.h"
 
 using json = nlohmann::json;
 
